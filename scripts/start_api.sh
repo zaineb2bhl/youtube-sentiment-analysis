@@ -8,6 +8,13 @@ cd "$(dirname "$0")/.."
 IMAGE=youtube-sentiment-api
 NAME=sentiment-api
 
+echo ">> attente du daemon Docker"
+for i in $(seq 1 60); do
+  docker info >/dev/null 2>&1 && break
+  sleep 2
+done
+docker info >/dev/null 2>&1 || { echo "!! Docker indisponible" >&2; exit 1; }
+
 echo ">> docker build"
 docker build -t "$IMAGE" .
 

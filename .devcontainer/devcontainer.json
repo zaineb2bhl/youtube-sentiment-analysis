@@ -1,12 +1,9 @@
 {
   "name": "YouTube Sentiment API",
-  "image": "mcr.microsoft.com/devcontainers/python:3.11",
-  "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
-  },
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
   "forwardPorts": [7860],
   "portsAttributes": {
     "7860": { "label": "Sentiment API", "onAutoForward": "notify" }
   },
-  "postStartCommand": "bash scripts/start_api.sh"
+  "postStartCommand": "bash scripts/start_api.sh || echo 'start_api.sh a échoué : relancer manuellement bash scripts/start_api.sh'"
 }
