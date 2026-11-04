@@ -133,8 +133,15 @@ def test_api(base, cat):
     except requests.RequestException as e:
         check(cat, f"/health joignable ({base})", False, str(e)[:80])
         return None
-    body = r.json()
-    check(cat, "GET /health → 200 et modèle chargé", r.ok and body.get("model_loaded"), str(body))
+    try:
+        body = r.json()
+    except ValueError:
+        body = {}
+    if not (r.ok and body.get("model_loaded")):
+        check(cat, f"GET /health → 200 et modèle chargé ({base})", False,
+              f"code {r.status_code} — Codespace arrêté ou port 7860 non public ?")
+        return None
+    check(cat, "GET /health → 200 et modèle chargé", True, str(body))
     check(cat, "GET /docs → 200", requests.get(f"{base}/docs", timeout=30).ok)
 
     pre = requests.options(f"{base}/predict_batch", timeout=30, headers={
