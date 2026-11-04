@@ -12,7 +12,7 @@ const state = {
 
 const settings = {
   theme: "light",
-  apiEnv: "local", // passer à "prod" (ou via ⚙) une fois l'API déployée
+  apiEnv: "prod",
   customUrl: "",
   maxComments: 100,
   autoScroll: true,
