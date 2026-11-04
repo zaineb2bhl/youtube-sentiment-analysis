@@ -1,0 +1,41 @@
+# Virtual environments
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Environment files
+.env
+.env.*
+
+# Logs
+logs/*.log
+
+# Tests
+.pytest_cache/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Data and models (keep raw/processed folders but ignore generated data)
+data/raw/*.csv
+!data/raw/.gitkeep
+
+data/processed/*
+!data/processed/.gitkeep
+
+# Les modèles (~800 Ko) SONT versionnés : livrable + nécessaires au build Docker dans Codespaces.
+
+# IDE/editor
+.vscode/
+.idea/
+
+# Build artifacts
+*.zip
+*.tar.gz
+
+# Extension packagée
+!chrome-extension.zip

@@ -1,0 +1,20 @@
+# On n'envoie au daemon Docker que le strict nécessaire
+.git
+.venv
+venv
+.vscode
+.devcontainer
+**/__pycache__
+**/*.pyc
+.pytest_cache
+data/
+logs/
+reports/
+tests/
+scripts/
+notebooks/
+chrome-extension/
+chrome-extension.zip
+*.pdf
+*.md
+.env

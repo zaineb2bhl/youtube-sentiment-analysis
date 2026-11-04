@@ -1,0 +1,8 @@
+# Dépendances de PRODUCTION uniquement (pas de pandas, matplotlib, pytest...)
+# Versions figées : le modèle joblib doit être rechargé avec la même version de scikit-learn.
+fastapi==0.162.0
+uvicorn==0.54.0
+pydantic==2.12.5
+scikit-learn==1.8.0
+numpy==2.3.5
+joblib==1.5.3

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>YouTube Sentiment Analyzer</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img src="icons/icon48.png" alt="" />
+      <div>
+        <h1>Sentiment Analyzer</h1>
+        <span id="api-status" class="status unknown" title="État de l'API">API ?</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button id="settings-toggle" class="icon-btn" title="Paramètres" aria-label="Paramètres">⚙</button>
+      <button id="theme-toggle" class="icon-btn" title="Mode sombre / clair" aria-label="Changer de thème">🌙</button>
+    </div>
+  </header>
+
+  <section id="settings" class="card hidden">
+    <label>Environnement de l'API
+      <select id="api-env">
+        <option value="prod">Production (GitHub Codespaces)</option>
+        <option value="local">Local (127.0.0.1:8000)</option>
+        <option value="custom">URL personnalisée</option>
+      </select>
+    </label>
+    <input id="api-url" type="url" placeholder="https://…" class="hidden" />
+    <label>Nombre max de commentaires
+      <input id="max-comments" type="number" min="10" max="1000" step="10" value="100" />
+    </label>
+    <label class="check"><input id="auto-scroll" type="checkbox" checked /> Faire défiler pour charger plus de commentaires</label>
+    <label class="check"><input id="include-replies" type="checkbox" /> Inclure les réponses (threads dépliés)</label>
+  </section>
+
+  <button id="analyze" class="primary">Analyser les commentaires</button>
+
+  <div id="loading" class="hidden">
+    <div class="spinner"></div>
+    <span id="loading-text">Extraction des commentaires…</span>
+  </div>
+
+  <div id="error" class="error hidden" role="alert"></div>
+
+  <main id="results" class="hidden">
+    <p id="video-title" class="video-title"></p>
+
+    <section class="card summary">
+      <svg id="donut" viewBox="0 0 42 42" width="110" height="110" aria-label="Répartition des sentiments"></svg>
+      <div class="stats">
+        <div class="overall">Global : <strong id="overall"></strong></div>
+        <div class="stat positive"><span class="dot"></span>Positif <b id="pct-positive"></b></div>
+        <div class="stat neutral"><span class="dot"></span>Neutre <b id="pct-neutral"></b></div>
+        <div class="stat negative"><span class="dot"></span>Négatif <b id="pct-negative"></b></div>
+        <div class="meta" id="meta"></div>
+      </div>
+    </section>
+
+    <div class="bar" id="bar" aria-hidden="true">
+      <span class="positive"></span><span class="neutral"></span><span class="negative"></span>
+    </div>
+
+    <div class="toolbar">
+      <div class="filters" role="tablist">
+        <button class="filter active" data-filter="all">Tous</button>
+        <button class="filter" data-filter="positive">Positifs</button>
+        <button class="filter" data-filter="neutral">Neutres</button>
+        <button class="filter" data-filter="negative">Négatifs</button>
+      </div>
+    </div>
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="Rechercher dans les commentaires…" />
+      <select id="sort" title="Trier">
+        <option value="original">Ordre d'origine</option>
+        <option value="conf-desc">Confiance ↓</option>
+        <option value="conf-asc">Confiance ↑</option>
+      </select>
+    </div>
+
+    <ul id="comment-list"></ul>
+
+    <div class="export">
+      <button id="copy" class="secondary">📋 Copier</button>
+      <button id="export-csv" class="secondary">⬇ CSV</button>
+      <button id="export-json" class="secondary">⬇ JSON</button>
+    </div>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="config.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

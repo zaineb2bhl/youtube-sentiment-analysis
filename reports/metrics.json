@@ -1,0 +1,78 @@
+{
+  "accuracy": 0.8938585692791684,
+  "f1_macro": 0.8848770776082469,
+  "per_class": {
+    "négatif": {
+      "precision": 0.8417402269861286,
+      "recall": 0.8105646630236795,
+      "f1-score": 0.8258583359109186
+    },
+    "neutre": {
+      "precision": 0.8952975753122704,
+      "recall": 0.9670634920634921,
+      "f1-score": 0.9297977871041587
+    },
+    "positif": {
+      "precision": 0.9200799200799201,
+      "recall": 0.8788167938931297,
+      "f1-score": 0.8989751098096632
+    }
+  },
+  "inference_ms_batch50": 3.576299990527332,
+  "confusion_matrix": [
+    [
+      1335,
+      119,
+      193
+    ],
+    [
+      36,
+      2437,
+      47
+    ],
+    [
+      215,
+      166,
+      2763
+    ]
+  ],
+  "best_params": {
+    "clf__C": 10,
+    "tfidf__max_features": 30000,
+    "tfidf__ngram_range": [
+      1,
+      1
+    ]
+  },
+  "comparison": [
+    {
+      "model": "LinearSVC",
+      "accuracy": 0.8812747914102038,
+      "f1_macro": 0.8703156126231999,
+      "fit_s": 9.280855100019835
+    },
+    {
+      "model": "LogisticRegression",
+      "accuracy": 0.8477636438243742,
+      "f1_macro": 0.8375132251818375,
+      "fit_s": 11.803854900004808
+    },
+    {
+      "model": "RandomForest",
+      "accuracy": 0.7680207905895227,
+      "f1_macro": 0.7057698898589226,
+      "fit_s": 193.29656829999294
+    },
+    {
+      "model": "ComplementNB",
+      "accuracy": 0.6648885241417043,
+      "f1_macro": 0.6242413040387558,
+      "fit_s": 8.075606900034472
+    }
+  ],
+  "criteria": {
+    "accuracy>=0.80": true,
+    "f1_per_class>0.75": true,
+    "inference<100ms": true
+  }
+}
